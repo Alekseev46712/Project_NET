@@ -2,7 +2,6 @@
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-using CacheLookAttribute = SeleniumExtras.PageObjects.CacheLookupAttribute;
 
 namespace UnitTestProject.test.pages
 {

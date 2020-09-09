@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using UnitTestProject.test.pages;
 using UnitTestProject.test.tests;
 
@@ -10,18 +11,19 @@ namespace UnitTestProject
 {
     [TestClass]
     public class ArticleTests : BaseTest
+
     {
         private readonly List<string> expectedSecondaryArticles = new List<string>()
         {
-            "Oxford vaccine trial paused as participant falls ill",
-            "'Super simple' restrictions to curb England spike",
-            "Police shoot autistic boy after mum calls for help",
-            "US towns almost destroyed by wildfires",
-            "Kardashians announce end of hit reality show"
+            "Migrant camp fire leaves 13,000 without shelter",
+            "Diplomats surround 'harassed' Belarus Nobel winner",
+            "US to withdraw 2,200 troops from Iraq within weeks",
+            "Terminally ill man backs down on vow to starve",
+            "Smoke from California wildfires turns skies orange"
         };
 
-        public string EXPECTED_TOP_HEADLINE = "Fire destroys Greece's largest migrant camp";
-        public string HEADLINE_OF_THE_ARTICLE_SEARCH_BY_Category_LINK = "D-Block Europe";
+        public string EXPECTED_TOP_HEADLINE = "Book says Trump deliberately downplayed virus";
+        public string HEADLINE_OF_THE_ARTICLE_SEARCH_BY_Category_LINK = "Americans, go home: Tension at Canada-US border";
         
         [TestMethod]
         public void checkNameOfTheHeadlineArticle()
@@ -43,6 +45,7 @@ namespace UnitTestProject
                 Assert.AreEqual(expectedSecondaryArticles[i], getBBCNewsPage().getSecondaryArticles()[i].Text);
               }
         }
+
 
         [TestMethod]
         public void checkNameOfArticleSearchedByCategoryLink()
@@ -69,10 +72,8 @@ namespace UnitTestProject
 
     }
     [TestClass]
-    public class CoronovirusStoryTests
+    public class CoronovirusStoryTests : BaseTest
     {
-        readonly IWebDriver driver = new ChromeDriver();
-        public string URL = "https://www.bbc.com";
         public string STORY = "I have coronavirus";
         public string NAME = "Li";
         public string EMAIL = "Li@gmail.com";
@@ -82,72 +83,114 @@ namespace UnitTestProject
         [TestMethod]
         public void checkErrorMessageWhenSubmitEmptyName()
         {
-            driver.Navigate().GoToUrl(URL);
-            driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'news')]")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.FindElement(By.XPath("//button[@class = 'sign_in-exit']")).Click();
-            driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'coronavirus')]  ")).Click();
-            driver.FindElement(By.XPath("//span[contains(text(),'Your Coronavirus Stories')]")).Click();
-            driver.FindElement(By.XPath("//a[@href = '/news/10725415']")).Click();
-            driver.FindElement(By.XPath("//p[contains(text(),'over 16')]")).Click();
-            driver.FindElement(By.XPath("//p[contains(text(),'accept')]")).Click();
-            driver.FindElement(By.XPath("//textarea[contains(@id,'hearken')]")).SendKeys(STORY);
-            driver.FindElement(By.XPath("//input[@aria-label ='Name']")).SendKeys("");
-            driver.FindElement(By.XPath("//input[@aria-label ='Email address']")).SendKeys(EMAIL);
-            driver.FindElement(By.XPath("//input[@aria-label ='Contact number ']")).SendKeys(CONTACT_NUMBER);
-            driver.FindElement(By.XPath("//input[@aria-label ='Location ']")).SendKeys(LOCATION);
-            driver.FindElement(By.XPath("//button[@class='button']")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            Assert.AreEqual("Name can't be blank", driver.FindElement(By.XPath("//div[@class='text-input--error']//div[@class='input-error-message']")).Text);
+            //    driver.Navigate().GoToUrl(URL);
+            //    driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'news')]")).Click();
+            //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //    driver.FindElement(By.XPath("//button[@class = 'sign_in-exit']")).Click();
+            //    driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'coronavirus')]  ")).Click();
+            //    driver.FindElement(By.XPath("//span[contains(text(),'Your Coronavirus Stories')]")).Click();
+            //    driver.FindElement(By.XPath("//a[@href = '/news/10725415']")).Click();
+            //    driver.FindElement(By.XPath("//p[contains(text(),'over 16')]")).Click();
+            //    driver.FindElement(By.XPath("//p[contains(text(),'accept')]")).Click();
+           
+            //    driver.FindElement(By.XPath("//textarea[contains(@id,'hearken')]")).SendKeys(STORY);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Name']")).SendKeys("");
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Email address']")).SendKeys(EMAIL);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Contact number ']")).SendKeys(CONTACT_NUMBER);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Location ']")).SendKeys(LOCATION);
+            //    driver.FindElement(By.XPath("//button[@class='button']")).Click();
+            //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //    Assert.AreEqual("Name can't be blank", driver.FindElement(By.XPath("//div[@class='text-input--error']//div[@class='input-error-message']")).Text);
+            getHomePage().clickOnNews();
+            getBasePage().implicitWait(10);
+            getBBCNewsPage().clickOnSighExitButton();
+            getBBCNewsPage().clickOnCoronavirusTab();
+            getCoronavirusPage().clickOnYourCoronavirusStoryTab();
+            getCoronavirusPage().clickOnhowToShareWithBBC();
+            getHaveYourSayPage().clickOnOver16CheckBox();
+            getHaveYourSayPage().clickOnacceptTermsCheckBox();
+            getHaveYourSayPage().fillStoryTextArea(STORY);
+            getHaveYourSayPage().fillNameInput("");
+            getHaveYourSayPage().fillEmailInput(EMAIL);
+            getHaveYourSayPage().fillTelInput(CONTACT_NUMBER);
+            getHaveYourSayPage().filllocationInput(LOCATION);
+            getHaveYourSayPage().clickOnSubmitButton();
+            getBasePage().implicitWait(10);
+            Assert.AreEqual("Name can't be blank", getHaveYourSayPage().getBlankNameErrorMessage());
         }
 
         [TestMethod]
         public void checkErrorMessageWhenSubmitEmptyStory()
         {
-            driver.Navigate().GoToUrl(URL);
-            driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'news')]")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.FindElement(By.XPath("//button[@class = 'sign_in-exit']")).Click();
-            driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'coronavirus')]  ")).Click();
-            driver.FindElement(By.XPath("//span[contains(text(),'Your Coronavirus Stories')]")).Click();
-            driver.FindElement(By.XPath("//a[@href = '/news/10725415']")).Click();
-            driver.FindElement(By.XPath("//p[contains(text(),'over 16')]")).Click();
-            driver.FindElement(By.XPath("//p[contains(text(),'accept')]")).Click();
-            driver.FindElement(By.XPath("//textarea[contains(@id,'hearken')]")).SendKeys("");
-            driver.FindElement(By.XPath("//input[@aria-label ='Name']")).SendKeys(NAME);
-            driver.FindElement(By.XPath("//input[@aria-label ='Email address']")).SendKeys(EMAIL);
-            driver.FindElement(By.XPath("//input[@aria-label ='Contact number ']")).SendKeys(CONTACT_NUMBER);
-            driver.FindElement(By.XPath("//input[@aria-label ='Location ']")).SendKeys(LOCATION);
-            driver.FindElement(By.XPath("//button[@class='button']")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            Assert.AreEqual("can't be blank", driver.FindElement(By.XPath("//div[@class='long-text-input-container']//div[@class='input-error-message'] ")).Text);
+            //    driver.Navigate().GoToUrl(URL);
+            //    driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'news')]")).Click();
+            //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //    driver.FindElement(By.XPath("//button[@class = 'sign_in-exit']")).Click();
+            //    driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'coronavirus')]  ")).Click();
+            //    driver.FindElement(By.XPath("//span[contains(text(),'Your Coronavirus Stories')]")).Click();
+            //    driver.FindElement(By.XPath("//a[@href = '/news/10725415']")).Click();
+            //    driver.FindElement(By.XPath("//p[contains(text(),'over 16')]")).Click();
+            //    driver.FindElement(By.XPath("//p[contains(text(),'accept')]")).Click();
+            //    driver.FindElement(By.XPath("//textarea[contains(@id,'hearken')]")).SendKeys("");
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Name']")).SendKeys(NAME);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Email address']")).SendKeys(EMAIL);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Contact number ']")).SendKeys(CONTACT_NUMBER);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Location ']")).SendKeys(LOCATION);
+            //    driver.FindElement(By.XPath("//button[@class='button']")).Click();
+            //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //    Assert.AreEqual("can't be blank", driver.FindElement(By.XPath("//div[@class='long-text-input-container']//div[@class='input-error-message'] ")).Text);
+            getHomePage().clickOnNews();
+            getBasePage().implicitWait(10);
+            getBBCNewsPage().clickOnSighExitButton();
+            getBBCNewsPage().clickOnCoronavirusTab();
+            getCoronavirusPage().clickOnYourCoronavirusStoryTab();
+            getCoronavirusPage().clickOnhowToShareWithBBC();
+            getHaveYourSayPage().clickOnOver16CheckBox();
+            getHaveYourSayPage().clickOnacceptTermsCheckBox();
+            getHaveYourSayPage().fillStoryTextArea("");
+            getHaveYourSayPage().fillNameInput(NAME);
+            getHaveYourSayPage().fillEmailInput(EMAIL);
+            getHaveYourSayPage().fillTelInput(CONTACT_NUMBER);
+            getHaveYourSayPage().filllocationInput(LOCATION);
+            getHaveYourSayPage().clickOnSubmitButton();
+            getBasePage().implicitWait(10);
+            Assert.AreEqual("can't be blank", getHaveYourSayPage().getBlankStoryErrorMessage());
         }
 
         [TestMethod]
         public void checkErrorMessageWhenSubmitWithoutClickCheckBoxOver16()
         {
-            driver.Navigate().GoToUrl(URL);
-            driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'news')]")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.FindElement(By.XPath("//button[@class = 'sign_in-exit']")).Click();
-            driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'coronavirus')]  ")).Click();
-            driver.FindElement(By.XPath("//span[contains(text(),'Your Coronavirus Stories')]")).Click();
-            driver.FindElement(By.XPath("//a[@href = '/news/10725415']")).Click();
-            driver.FindElement(By.XPath("//p[contains(text(),'accept')]")).Click();
-            driver.FindElement(By.XPath("//textarea[contains(@id,'hearken')]")).SendKeys(STORY);
-            driver.FindElement(By.XPath("//input[@aria-label ='Name']")).SendKeys(NAME);
-            driver.FindElement(By.XPath("//input[@aria-label ='Email address']")).SendKeys(EMAIL);
-            driver.FindElement(By.XPath("//input[@aria-label ='Contact number ']")).SendKeys(CONTACT_NUMBER);
-            driver.FindElement(By.XPath("//input[@aria-label ='Location ']")).SendKeys(LOCATION);
-            driver.FindElement(By.XPath("//button[@class='button']")).Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            Assert.AreEqual("must be accepted", driver.FindElement(By.XPath("//div[contains(text(),'must be accepted')]")).Text);
-            
-        }
-        [TestCleanup]
-        public void cleanUp()
-        {
-            driver.Close();
+            //    driver.Navigate().GoToUrl(URL);
+            //    driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'news')]")).Click();
+            //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //    driver.FindElement(By.XPath("//button[@class = 'sign_in-exit']")).Click();
+            //    driver.FindElement(By.XPath("//nav[@role = 'navigation']//a[contains(@href, 'coronavirus')]  ")).Click();
+            //    driver.FindElement(By.XPath("//span[contains(text(),'Your Coronavirus Stories')]")).Click();
+            //    driver.FindElement(By.XPath("//a[@href = '/news/10725415']")).Click();
+            //    driver.FindElement(By.XPath("//p[contains(text(),'accept')]")).Click();
+            //    driver.FindElement(By.XPath("//textarea[contains(@id,'hearken')]")).SendKeys(STORY);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Name']")).SendKeys(NAME);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Email address']")).SendKeys(EMAIL);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Contact number ']")).SendKeys(CONTACT_NUMBER);
+            //    driver.FindElement(By.XPath("//input[@aria-label ='Location ']")).SendKeys(LOCATION);
+            //    driver.FindElement(By.XPath("//button[@class='button']")).Click();
+            //    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //    Assert.AreEqual("must be accepted", driver.FindElement(By.XPath("//div[contains(text(),'must be accepted')]")).Text);
+            getHomePage().clickOnNews();
+            getBasePage().implicitWait(10);
+            getBBCNewsPage().clickOnSighExitButton();
+            getBBCNewsPage().clickOnCoronavirusTab();
+            getCoronavirusPage().clickOnYourCoronavirusStoryTab();
+            getCoronavirusPage().clickOnhowToShareWithBBC();
+            getHaveYourSayPage().clickOnacceptTermsCheckBox();
+            getHaveYourSayPage().fillStoryTextArea(STORY);
+            getHaveYourSayPage().fillNameInput("");
+            getHaveYourSayPage().fillEmailInput(EMAIL);
+            getHaveYourSayPage().fillTelInput(CONTACT_NUMBER);
+            getHaveYourSayPage().filllocationInput(LOCATION);
+            getHaveYourSayPage().clickOnSubmitButton();
+            getBasePage().implicitWait(10);
+            Assert.AreEqual("must be accepted", getHaveYourSayPage().getSubmitWithoutClickCheckBoxOver16ErrorMessage());
         }
     }
 }

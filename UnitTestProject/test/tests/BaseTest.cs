@@ -34,5 +34,9 @@ namespace UnitTestProject.test.tests
 
         public SearchResultPage getSearchResultPage() { return new SearchResultPage(getDriver()); }
 
+        public CoronavirusPage getCoronavirusPage() { return new CoronavirusPage(getDriver()); }
+
+        public HaveYourSayPage getHaveYourSayPage() { return new HaveYourSayPage(getDriver()); }
+        
     }
 }
