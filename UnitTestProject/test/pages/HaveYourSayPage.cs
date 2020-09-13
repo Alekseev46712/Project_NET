@@ -1,69 +1,75 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace UnitTestProject.test.pages
 {
     public class HaveYourSayPage : BasePage
     {
+        [FindsBy(How = How.Id, Using = "hearken-curiosity-6173")]
+        private IWebElement HowToShareForm;
+
         [FindsBy(How = How.XPath, Using = "//p[contains(text(),'over 16')]")]
-        private IWebElement over16CheckBox;
+        private IWebElement Over16CheckBox;
 
         [FindsBy(How = How.XPath, Using = "//p[contains(text(),'accept')]")]
-        private IWebElement acceptTermsCheckBox;
+        private IWebElement AcceptTermsCheckBox;
 
         [FindsBy(How = How.XPath, Using = "//textarea[contains(@id,'hearken')]")]
-        private IWebElement storyTextArea;
+        private IWebElement StoryTextArea;
 
         [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Name']")]
-        private IWebElement nameInput;
+        private IWebElement NameInput;
 
         [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Email address']")]
-        private IWebElement emailInput;
+        private IWebElement EmailInput;
 
         [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Contact number ']")]
-        private IWebElement telInput;
+        private IWebElement TelInput;
 
         [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Location ']")]
-        private IWebElement locationInput;
+        private IWebElement LocationInput;
 
         [FindsBy(How = How.XPath, Using = "//button[@class='button']")]
-        private IWebElement submitButton;
+        private IWebElement SubmitButton;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='text-input--error']//div[@class='input-error-message']")]
-        private IWebElement blankNameErrorMessage;
+        private IWebElement BlankNameErrorMessage;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='long-text-input-container']//div[@class='input-error-message'] ")]
-        private IWebElement blankStoryErrorMessage;
+        private IWebElement BlankStoryErrorMessage;
 
         [FindsBy(How = How.XPath, Using = "//div[contains(text(),'must be accepted')]")]
         private IWebElement SubmitWithoutClickCheckBoxOver16ErrorMessage;
-        
-        //div[contains(text(),'must be accepted')]
+
+
+       // public void FillForm(Dictionary<string, string> values, IList<int> checkboxNumbers, IWebElement form) { form.FillForm(values, checkboxNumbers, form); }
+
+
         public HaveYourSayPage(IWebDriver driver) : base(driver) { }
 
-        public void clickOnOver16CheckBox() { over16CheckBox.Click(); }
+        public void ClickOnOver16CheckBox() { Over16CheckBox.Click(); }
 
-        public void clickOnacceptTermsCheckBox() { acceptTermsCheckBox.Click(); }
+        public void ClickOnacceptTermsCheckBox() { AcceptTermsCheckBox.Click(); }
 
-        public void fillStoryTextArea(string keyword) { storyTextArea.SendKeys(keyword); }
+        public void FillStoryTextArea(string keyword) { StoryTextArea.SendKeys(keyword); }
 
-        public void fillNameInput(string keyword) { nameInput.SendKeys(keyword); }
+        public void FillNameInput(string keyword) { NameInput.SendKeys(keyword); }
 
-        public void fillEmailInput(string keyword) { emailInput.SendKeys(keyword); }
+        public void FillEmailInput(string keyword) { EmailInput.SendKeys(keyword); }
 
-        public void fillTelInput(string keyword) { telInput.SendKeys(keyword); }
+        public void FillTelInput(string keyword) { TelInput.SendKeys(keyword); }
 
-        public void filllocationInput(string keyword) { locationInput.SendKeys(keyword); }
+        public void FilllocationInput(string keyword) { LocationInput.SendKeys(keyword); }
 
-        public void clickOnSubmitButton() { submitButton.Click(); }
+        public void ClickOnSubmitButton() { SubmitButton.Click(); }
 
-        public string getBlankNameErrorMessage() { return blankNameErrorMessage.Text ; }
+        public string GetBlankNameErrorMessage() { return BlankNameErrorMessage.Text ; }
 
-        public string getBlankStoryErrorMessage() { return blankStoryErrorMessage.Text; }
+        public string GetBlankStoryErrorMessage() { return BlankStoryErrorMessage.Text; }
 
-        public string getSubmitWithoutClickCheckBoxOver16ErrorMessage() { return SubmitWithoutClickCheckBoxOver16ErrorMessage.Text; }
+        public string GetSubmitWithoutClickCheckBoxOver16ErrorMessage() { return SubmitWithoutClickCheckBoxOver16ErrorMessage.Text; }
+        
+        public IWebElement GetHowToShareForm() { return HowToShareForm; }
     }
 }

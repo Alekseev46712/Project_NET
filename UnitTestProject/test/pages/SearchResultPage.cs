@@ -1,17 +1,16 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
-using System.Collections.Generic;
 
 namespace UnitTestProject.test.pages
 {
     public class SearchResultPage : BasePage
     {
-        [FindsBy(How = How.XPath, Using = "//a[contains(@href,'us')]//span")]
+        [FindsBy(How = How.XPath, Using = "//div[contains(@class,'PromoContent')]//a[contains(@href,'bbc')]//span")]
         private IWebElement nameOfArticleOnSearchPage;
         public SearchResultPage(IWebDriver driver) : base(driver) { }
         
-        public string getNameOfArticleOnSearchPage() {return nameOfArticleOnSearchPage.Text; }
+        public string GetNameOfArticleOnSearchPage() {return nameOfArticleOnSearchPage.Text; }
 
     }
 }

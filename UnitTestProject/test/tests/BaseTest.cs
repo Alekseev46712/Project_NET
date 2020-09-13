@@ -3,7 +3,6 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
 using UnitTestProject.test.pages;
 
 namespace UnitTestProject.test.tests
@@ -18,25 +17,24 @@ namespace UnitTestProject.test.tests
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://www.bbc.com");
-            
-
         }
+
         [TestCleanup]
         public void RunAfterAnytests() { driver.Close(); }
 
-        public IWebDriver getDriver() { return driver; }
+        public IWebDriver GetDriver() { return driver; }
 
-        public BasePage getBasePage() { return new BasePage(getDriver()); }
+        public BasePage GetBasePage() { return new BasePage(GetDriver()); }
        
-        public HomePage getHomePage() { return new HomePage(getDriver()); }
+        public HomePage GetHomePage() { return new HomePage(GetDriver()); }
 
-        public BBCNewsPage getBBCNewsPage() { return new BBCNewsPage(getDriver()); }
+        public BbcNewsPage GetBBCNewsPage() { return new BbcNewsPage(GetDriver()); }
 
-        public SearchResultPage getSearchResultPage() { return new SearchResultPage(getDriver()); }
+        public SearchResultPage GetSearchResultPage() { return new SearchResultPage(GetDriver()); }
 
-        public CoronavirusPage getCoronavirusPage() { return new CoronavirusPage(getDriver()); }
+        public CoronavirusPage GetCoronavirusPage() { return new CoronavirusPage(GetDriver()); }
 
-        public HaveYourSayPage getHaveYourSayPage() { return new HaveYourSayPage(getDriver()); }
+        public HaveYourSayPage GetHaveYourSayPage() { return new HaveYourSayPage(GetDriver()); }
         
     }
 }

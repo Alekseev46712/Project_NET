@@ -2,9 +2,6 @@
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
 using System;
-using System.Collections.Generic;
-using CacheLookAttribute = SeleniumExtras.PageObjects.CacheLookupAttribute;
-
 
 
 namespace UnitTestProject.test.pages
@@ -12,22 +9,27 @@ namespace UnitTestProject.test.pages
     public class BasePage
     {
         readonly IWebDriver driver;
-        private WebDriverWait wait;
         public BasePage(IWebDriver driver)
         {
             this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(100));
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.XPath, Using = "//nav//a[contains(@href, 'news')]")]
-        private IWebElement news;
 
-        public void implicitWait(long timeToWait)
+        public void ImplicitWait(long timeToWait)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeToWait);
         }
 
-        public void clickOnNews() { news.Click(); }
+        public void WaitForPageLoadComplete(long timeToWait)
+        {
+            new WebDriverWait(driver, TimeSpan.FromSeconds(timeToWait))
+                .Until(webDriver => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
+        }
+
+        public bool ElementIsVisible(IWebElement element)
+        {
+            return element.Displayed && element.Enabled;
+        }
     }
 }
