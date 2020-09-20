@@ -97,7 +97,7 @@ namespace UnitTestProject
             //{"Postcode", "10" },
             {"Location", "China" },
         };
-
+         
         [TestMethod]
         public void CheckErrorMessageWhenSubmitWithEmptyName()
         {
