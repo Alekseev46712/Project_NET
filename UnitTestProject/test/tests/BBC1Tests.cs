@@ -8,12 +8,12 @@ using UnitTestProject.test.tests;
 namespace UnitTestProject
 {
     [TestClass]
-    public class ArticleTests : BaseTest
+    public class TitleTests : BaseTest
     {
-        public string EXPECTED_TOP_HEADLINE = "Israel announces second national virus lockdown";
+        public string EXPECTED_TOP_HEADLINE = "Trump denies minimising Covid risk: I 'up-played' it";
         
         [TestMethod]
-        public void CheckNameOfTheHeadlineArticle()
+        public void CheckTitleOfMainArticle()
         {
             GetHomePage().ClickOnNews();
             GetBasePage().ImplicitWait(10);
@@ -25,11 +25,11 @@ namespace UnitTestProject
 
         private readonly List<string> ExpectedSecondaryArticles = new List<string>()
         {
-            "Belarus opposition keeps up anti-Lukashenko protest",
-            "Bloomberg donates $100m for Biden in Florida",
-            "Wind warning prompts fears for US West Coast fires",
-            "South Korea's Covid detectives",
-            "Greece to build permanent migrant centre on Lesbos"
+            "UK teachers 'must get priority access to tests'",
+            "UN accuses Venezuela of crimes against humanity",
+            "Former athletics head jailed for corruption",
+            "Self-driving car operator charged over fatal crash",
+            "Barbados to remove Queen as head of state"
         };
 
         [TestMethod]
@@ -46,17 +46,17 @@ namespace UnitTestProject
         }
 
 
-        public string HEADLINE_OF_THE_ARTICLE_SEARCH_BY_Category_LINK = "Middle East weather forecast";
+        public string TITLE_OF_THE_ARTICLE_SEARCH_BY_Category_LINK = "US election 2020 polls: Who is ahead - Trump or Biden?";
 
         [TestMethod]
-        public void CheckNameOfArticleSearchedByCategoryLink()
+        public void CheckTitleOfArticleSearchedByCategoryLink()
         {
             GetHomePage().ClickOnNews();
             GetBasePage().ImplicitWait(10);
             if(GetBasePage().ElementIsVisible(GetBBCNewsPage().GetSignInPopUP()))
                 GetBBCNewsPage().ClickOnSighExitButton();
             GetBBCNewsPage().SearchByKeyword(GetBBCNewsPage().GetTextOfCategoryLink() + Keys.Enter);
-            Assert.AreEqual(HEADLINE_OF_THE_ARTICLE_SEARCH_BY_Category_LINK, GetSearchResultPage().GetNameOfArticleOnSearchPage());
+            Assert.AreEqual(TITLE_OF_THE_ARTICLE_SEARCH_BY_Category_LINK, GetSearchResultPage().GetNameOfArticleOnSearchPage());
         }
     }
 
@@ -69,12 +69,12 @@ namespace UnitTestProject
             {"Tell us", "" },
             {"Name", "Li" },
             {"Email", "Li@gmail.com" },
-            {"Contact", "10" },
+            {"Contact", "1" },
             {"Location", "China" },
         };
 
         readonly IList<int> AllCheckBoxesAreSelected = new List<int>() { 1, 2, 3 };
-       
+
         [TestMethod]
         public void CheckErrorMessageWhenSubmitWithEmptyStory()
         {
@@ -102,7 +102,7 @@ namespace UnitTestProject
         }
 
 
-        readonly IList<int> AllCheckBoxesWithoutOver16AreSelected = new List<int>() { 1, 3 };
+        readonly IList<int> AllCheckBoxesWithoutOver16AreSelected = new List<int>() { 1 };
 
         [TestMethod]
         public void CheckErrorMessageWhenSubmitWithoutClickCheckBoxOver16()
@@ -113,6 +113,12 @@ namespace UnitTestProject
         }
     }
 }
+
+
+
+
+
+
 
 
 

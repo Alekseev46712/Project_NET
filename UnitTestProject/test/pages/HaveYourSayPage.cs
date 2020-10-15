@@ -6,6 +6,9 @@ namespace UnitTestProject.test.pages
 {
     public class HaveYourSayPage : BasePage
     {
+        //[FindsBy(How = How.XPath, Using = "//div[@id='hearken-embed-module-4787-1272e']")]
+        //private IWebElement HowToShareForm;
+
         [FindsBy(How = How.Id, Using = "hearken-curiosity-6173")]
         private IWebElement HowToShareForm;
 
@@ -24,10 +27,16 @@ namespace UnitTestProject.test.pages
         [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Email address']")]
         private IWebElement EmailInput;
 
-        [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Contact number ']")]
+        [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Age']")]
+        private IWebElement AgeInput;
+
+        [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Telephone number']")]
         private IWebElement TelInput;
 
-        [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Location ']")]
+        [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Postcode']")]
+        private IWebElement PostcodeInput;
+
+        [FindsBy(How = How.XPath, Using = "//input[@aria-label ='Location']")]
         private IWebElement LocationInput;
 
         [FindsBy(How = How.XPath, Using = "//button[@class='button']")]
@@ -58,7 +67,11 @@ namespace UnitTestProject.test.pages
 
         public void FillEmailInput(string keyword) { EmailInput.SendKeys(keyword); }
 
+        public void FillAgeInput(string keyword) { AgeInput.SendKeys(keyword); }
+
         public void FillTelInput(string keyword) { TelInput.SendKeys(keyword); }
+
+        public void FillPostcodeInput(string keyword) { PostcodeInput.SendKeys(keyword); }
 
         public void FilllocationInput(string keyword) { LocationInput.SendKeys(keyword); }
 

@@ -11,7 +11,7 @@ namespace UnitTestProject.test.pages
 
         [FindsBy(How = How.XPath, Using = "//a[@href = '/news/10725415']")]
         private IWebElement HowToShareWithBBC;
-        
+
 
         public CoronavirusPage(IWebDriver driver) : base(driver) { }
 
