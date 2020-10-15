@@ -10,7 +10,7 @@ namespace UnitTestProject
     [TestClass]
     public class TitleTests : BaseTest
     {
-        public string EXPECTED_TOP_HEADLINE = "Trump denies minimising Covid risk: I 'up-played' it";
+        public string EXPECTED_TOP_HEADLINE = "Europe's Covid restrictions 'absolutely necessary'";
         
         [TestMethod]
         public void CheckTitleOfMainArticle()
@@ -46,7 +46,7 @@ namespace UnitTestProject
         }
 
 
-        public string TITLE_OF_THE_ARTICLE_SEARCH_BY_Category_LINK = "US election 2020 polls: Who is ahead - Trump or Biden?";
+        public string TITLE_OF_THE_ARTICLE_SEARCH_BY_Category_LINK = "Europe weather forecast";
 
         [TestMethod]
         public void CheckTitleOfArticleSearchedByCategoryLink()
