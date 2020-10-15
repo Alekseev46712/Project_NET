@@ -8,6 +8,9 @@ namespace UnitTestProject.test.pages
     {
         [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Your Coronavirus Stories')]")]
         private IWebElement YourCoronavirusStoryTab;
+        
+        //[FindsBy(How = How.XPath, Using = "//a[@href = '/news/52143212']")]
+        //private IWebElement HowToShareWithBBC;
 
         [FindsBy(How = How.XPath, Using = "//a[@href = '/news/10725415']")]
         private IWebElement HowToShareWithBBC;

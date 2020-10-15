@@ -73,6 +73,7 @@ namespace UnitTestProject
             {"Location", "China" },
         };
 
+        //readonly IList<int> AllCheckBoxesAreSelected = new List<int>() { 1, 2 };
         readonly IList<int> AllCheckBoxesAreSelected = new List<int>() { 1, 2, 3 };
 
         [TestMethod]
@@ -89,10 +90,12 @@ namespace UnitTestProject
             {"Tell us", "Story" },
             {"Name", "" },
             {"Email", "Email" },
+            //{"Age", "20" },
             {"Contact", "10" },
+            //{"Postcode", "10" },
             {"Location", "China" },
         };
-
+         
         [TestMethod]
         public void CheckErrorMessageWhenSubmitWithEmptyName()
         {
