@@ -6,9 +6,6 @@ namespace UnitTestProject.test.pages
 {
     public class HaveYourSayPage : BasePage
     {
-        //[FindsBy(How = How.XPath, Using = "//div[@id='hearken-embed-module-4787-1272e']")]
-        //private IWebElement HowToShareForm;
-
         [FindsBy(How = How.Id, Using = "hearken-curiosity-6173")]
         private IWebElement HowToShareForm;
 
